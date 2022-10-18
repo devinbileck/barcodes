@@ -31,7 +31,7 @@
 
         <!-- JavaFX -->
         <javafx.version>19</javafx.version>
-        <controlsfx.version>11.1.1</controlsfx.version>
+        <controlsfx.version>11.1.2</controlsfx.version>
 
         <!-- Webcam -->
         <webcam-capture.version>0.3.12</webcam-capture.version>
