@@ -8,8 +8,9 @@ public class MainView extends View {
     private static final String STAGE_TITLE = "Barcodes";
 
     public final ListView listView = new ListView(this, "#listView");
+    public final Button generateBarcodeButton = new Button(this, "#generateBarcodeButton");
     public final Button scanBarcodeButton = new Button(this, "#scanBarcodeButton");
-    public final Button clearScannedContentButton = new Button(this, "#clearScannedContentButton");
+    public final Button clearBarcodesButton = new Button(this, "#clearBarcodesButton");
 
     private static MainView instance = null;
 

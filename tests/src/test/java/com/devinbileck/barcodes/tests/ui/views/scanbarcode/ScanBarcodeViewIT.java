@@ -92,7 +92,7 @@ class ScanBarcodeViewIT extends ViewIT {
 
         @Test
         void imageViewDisplaysImageFromSelectedFunctionalWebcam() throws TimeoutException {
-            ScanBarcodeView.getInstance().webcamComboBox.select(0);
+            ScanBarcodeView.getInstance().webcamComboBox.selectIndex(0);
             ScanBarcodeView.getInstance().webcamImageView.waitUntilNotNull(1);
             ScanBarcodeView.getInstance().webcamImageView.assertShown();
             ScanBarcodeView.getInstance().webcamStatusLabel.assertTextIsEqualTo("");
@@ -102,7 +102,7 @@ class ScanBarcodeViewIT extends ViewIT {
 
         @Test
         void imageViewDisplaysErrorFromSelectedDisconnectedWebcam() throws TimeoutException {
-            ScanBarcodeView.getInstance().webcamComboBox.select(1);
+            ScanBarcodeView.getInstance().webcamComboBox.selectIndex(1);
             ScanBarcodeView.getInstance().webcamImageView.waitUntilNotNull(1);
             ScanBarcodeView.getInstance().webcamImageView.assertShown();
             ScanBarcodeView.getInstance()
@@ -117,7 +117,7 @@ class ScanBarcodeViewIT extends ViewIT {
 
         @Test
         void imageViewDisplaysErrorFromSelectedNonOpeningWebcam() {
-            ScanBarcodeView.getInstance().webcamComboBox.select(2);
+            ScanBarcodeView.getInstance().webcamComboBox.selectIndex(2);
             ScanBarcodeView.getInstance().webcamImageView.assertIsNull();
             ScanBarcodeView.getInstance().webcamImageView.assertNotShown();
             ScanBarcodeView.getInstance()
@@ -127,7 +127,7 @@ class ScanBarcodeViewIT extends ViewIT {
 
         @Test
         void dialogClosesWhenClosingDialogWithWebcamSelected() {
-            ScanBarcodeView.getInstance().webcamComboBox.select(0);
+            ScanBarcodeView.getInstance().webcamComboBox.selectIndex(0);
             ScanBarcodeView.getInstance().closeButton.click();
             MainView.getInstance().listView.assertEmpty();
         }

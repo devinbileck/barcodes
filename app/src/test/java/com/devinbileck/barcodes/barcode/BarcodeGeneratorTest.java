@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 
 import org.junit.jupiter.api.Test;
 
+import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 
 class BarcodeGeneratorTest {
@@ -40,8 +41,11 @@ class BarcodeGeneratorTest {
                                                         .getClassLoader()
                                                         .getResource("Test_QR.png"))
                                         .getFile()));
-        BufferedImage actualImage = BarcodeGenerator.generateQRCodeImage("test");
-        assertThat(isImagesIdentical(expectedImage, actualImage)).isTrue();
+        BarcodeResult result = BarcodeGenerator.generateQRCodeImage("test");
+        assertThat(result)
+                .extracting(BarcodeResult::format, BarcodeResult::text)
+                .containsExactly(BarcodeFormat.QR_CODE, "test");
+        assertThat(isImagesIdentical(expectedImage, result.image())).isTrue();
     }
 
     @Test
@@ -55,7 +59,10 @@ class BarcodeGeneratorTest {
                                                         .getClassLoader()
                                                         .getResource("Test_QR_Custom_Size.png"))
                                         .getFile()));
-        BufferedImage actualImage = BarcodeGenerator.generateQRCodeImage("test", 1012, 1012);
-        assertThat(isImagesIdentical(expectedImage, actualImage)).isTrue();
+        BarcodeResult result = BarcodeGenerator.generateQRCodeImage("test", 1012, 1012);
+        assertThat(result)
+                .extracting(BarcodeResult::format, BarcodeResult::text)
+                .containsExactly(BarcodeFormat.QR_CODE, "test");
+        assertThat(isImagesIdentical(expectedImage, result.image())).isTrue();
     }
 }

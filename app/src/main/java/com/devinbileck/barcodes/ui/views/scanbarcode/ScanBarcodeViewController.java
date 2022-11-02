@@ -2,6 +2,13 @@ package com.devinbileck.barcodes.ui.views.scanbarcode;
 
 import java.util.function.Consumer;
 
+import org.springframework.stereotype.Component;
+
+import com.devinbileck.barcodes.barcode.BarcodeProcessor;
+import com.devinbileck.barcodes.barcode.BarcodeResult;
+import com.devinbileck.barcodes.webcam.WebcamService;
+import com.google.zxing.Result;
+
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -14,12 +21,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import org.springframework.stereotype.Component;
-
-import com.devinbileck.barcodes.barcode.BarcodeProcessor;
-import com.devinbileck.barcodes.webcam.WebcamService;
-
 import lombok.extern.slf4j.Slf4j;
 import net.rgielen.fxweaver.core.FxmlView;
 
@@ -31,22 +32,29 @@ public class ScanBarcodeViewController {
     private final WebcamService webcamService;
 
     private Stage stage;
-    private Consumer<String> onScanned;
+    private Consumer<BarcodeResult> onScanned;
     private boolean isClosing;
 
-    @FXML private BorderPane root;
+    @FXML
+    private BorderPane root;
 
-    @FXML private ComboBox<WebcamListItem> webcamComboBox;
+    @FXML
+    private ComboBox<WebcamListItem> webcamComboBox;
 
-    @FXML private FlowPane webcamPane;
+    @FXML
+    private FlowPane webcamPane;
 
-    @FXML private Label webcamStatusLabel;
+    @FXML
+    private Label webcamStatusLabel;
 
-    @FXML private ImageView webcamImageView;
+    @FXML
+    private ImageView webcamImageView;
 
-    @FXML public FlowPane bottomPane;
+    @FXML
+    public FlowPane bottomPane;
 
-    @FXML public Button closeButton;
+    @FXML
+    public Button closeButton;
 
     public ScanBarcodeViewController(ScanBarcodeViewModel viewModel, WebcamService webcamService) {
         this.viewModel = viewModel;
@@ -63,20 +71,15 @@ public class ScanBarcodeViewController {
 
         initializeWebcamStatusLabel();
 
-        webcamService
-                .valueProperty()
-                .addListener(
-                        (observable, oldValue, newValue) -> {
-                            if (isClosing || newValue == null) {
-                                return;
-                            }
-                            BarcodeProcessor.process(newValue)
-                                    .ifPresent(
-                                            value -> {
-                                                close();
-                                                onScanned.accept(value);
-                                            });
-                        });
+        webcamService.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (isClosing || newValue == null) {
+                return;
+            }
+            BarcodeProcessor.process(newValue).ifPresent(result -> {
+                close();
+                onScanned.accept(result);
+            });
+        });
 
         closeButton.setOnAction(actionEvent -> close());
     }
@@ -87,67 +90,49 @@ public class ScanBarcodeViewController {
         stage.setTitle("Scan Barcode");
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setOnCloseRequest(event -> cleanup());
-        stage.widthProperty()
-                .addListener(
-                        (observable, oldValue, newValue) -> Platform.runLater(this::updateView));
-        stage.heightProperty()
-                .addListener(
-                        (observable, oldValue, newValue) -> Platform.runLater(this::updateView));
+        stage.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(this::updateView));
+        stage.heightProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(this::updateView));
     }
 
     private void initializeWebcamComboBox() {
         webcamComboBox.setPromptText("Choose Camera");
-        webcamComboBox
-                .disableProperty()
-                .bind(
-                        Bindings.createBooleanBinding(
-                                () -> viewModel.getAvailableWebcams().isEmpty(),
-                                viewModel.getAvailableWebcams()));
-        webcamComboBox
-                .getSelectionModel()
-                .selectedItemProperty()
-                .addListener(
-                        (observable, oldValue, newValue) -> {
-                            if (newValue != null) {
-                                viewModel.clearWebcamImage();
-                                startWebcam(newValue);
-                            }
-                        });
+        webcamComboBox.disableProperty()
+                .bind(Bindings.createBooleanBinding(() -> viewModel.getAvailableWebcams().isEmpty(),
+                        viewModel.getAvailableWebcams()));
+        webcamComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                viewModel.clearWebcamImage();
+                startWebcam(newValue);
+            }
+        });
     }
 
     private void initializeWebcamStatusLabel() {
-        webcamService
-                .stateProperty()
-                .addListener(
-                        (observable, oldState, newState) -> {
-                            switch (newState) {
-                                case SCHEDULED -> webcamStatusLabel.setText("Waiting...");
-                                case FAILED -> {
-                                    String exception;
-                                    if (webcamService.getException().getCause() != null) {
-                                        exception =
-                                                String.valueOf(
-                                                        webcamService.getException().getCause());
-                                    } else {
-                                        exception = String.valueOf(webcamService.getException());
-                                    }
-                                    log.error(exception);
-                                    if (exception.contains("Failed to get image")) {
-                                        webcamStatusLabel.setText(
-                                                "Failed to get image from webcam. Is it"
-                                                        + " disconnected?");
-                                    } else {
-                                        webcamStatusLabel.setText("Failed to load webcam");
-                                    }
-                                }
-                                case CANCELLED -> webcamStatusLabel.setText("Stopped");
-                                default -> webcamStatusLabel.setText("");
-                            }
-                            Platform.runLater(this::updateView);
-                        });
+        webcamService.stateProperty().addListener((observable, oldState, newState) -> {
+            switch (newState) {
+                case SCHEDULED -> webcamStatusLabel.setText("Waiting...");
+                case FAILED -> {
+                    String exception;
+                    if (webcamService.getException().getCause() != null) {
+                        exception = String.valueOf(webcamService.getException().getCause());
+                    } else {
+                        exception = String.valueOf(webcamService.getException());
+                    }
+                    log.error(exception);
+                    if (exception.contains("Failed to get image")) {
+                        webcamStatusLabel.setText("Failed to get image from webcam. Is it" + " disconnected?");
+                    } else {
+                        webcamStatusLabel.setText("Failed to load webcam");
+                    }
+                }
+                case CANCELLED -> webcamStatusLabel.setText("Stopped");
+                default -> webcamStatusLabel.setText("");
+            }
+            Platform.runLater(this::updateView);
+        });
     }
 
-    public void show(Stage parentStage, Consumer<String> onScanned) {
+    public void show(Stage parentStage, Consumer<BarcodeResult> onScanned) {
         this.onScanned = onScanned;
         isClosing = false;
         try {
@@ -170,11 +155,10 @@ public class ScanBarcodeViewController {
 
     public void cleanup() {
         isClosing = true;
-        Platform.runLater(
-                () -> {
-                    webcamService.cancel();
-                    webcamService.reset();
-                });
+        Platform.runLater(() -> {
+            webcamService.cancel();
+            webcamService.reset();
+        });
     }
 
     public void close() {
@@ -202,13 +186,12 @@ public class ScanBarcodeViewController {
     }
 
     private void startWebcam(WebcamListItem newValue) {
-        Platform.runLater(
-                () -> {
-                    webcamService.cancel();
-                    webcamService.setWebcam(newValue.webcam());
-                    viewModel.setSelectedWebcam(newValue);
-                    webcamService.restart();
-                    updateView();
-                });
+        Platform.runLater(() -> {
+            webcamService.cancel();
+            webcamService.setWebcam(newValue.webcam());
+            viewModel.setSelectedWebcam(newValue);
+            webcamService.restart();
+            updateView();
+        });
     }
 }

@@ -27,7 +27,7 @@ class WebcamDiscoveryServiceTest {
         System.setProperty("simulation.enabled", "true");
         System.setProperty("simulation.fakeWebcams", "false");
         List<Webcam> webcams = webcamDiscoveryService.getWebcams();
-        assertThat(webcams).hasSize(0);
+        assertThat(webcams).isEmpty();
     }
 
     @Test

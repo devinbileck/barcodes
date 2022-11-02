@@ -33,7 +33,7 @@ public class WebcamDiscoveryService {
     private List<Webcam> simulatedWebcams() {
         BufferedImage qrCodeImage;
         try {
-            qrCodeImage = BarcodeGenerator.generateQRCodeImage(new Date().toString());
+            qrCodeImage = BarcodeGenerator.generateQRCodeImage(new Date().toString()).image();
         } catch (WriterException e) {
             log.error("Failed to generate QR image", e);
             return Collections.emptyList();

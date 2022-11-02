@@ -15,7 +15,7 @@ This is done to make a clear separation of tests.
 
 ### Headless
 
-The tests can be ran in headless mode, primarily for use in CI environments.
+The tests can be run in headless mode, primarily for use in CI environments.
 
 ```shell
 ./mvnw verify -pl tests -Pintegration-tests -Dheadless

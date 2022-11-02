@@ -4,8 +4,9 @@ This application allows you to scan barcodes using your webcam.
 
 # Screenshots
 
-![Main View](/images/main_view.png)
-![Scan View](/images/scan_view.png)
+![Main View](./images/main_view.png)
+![Generate View](./images/generate_view.png)
+![Scan View](./images/scan_view.png)
 
 ## Prerequisites
 

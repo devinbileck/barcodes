@@ -11,18 +11,18 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MainViewModel {
-    private final ObservableList<String> scannedContent = FXCollections.observableArrayList();
+    private final ObservableList<BarcodeListItem> barcodes = FXCollections.observableArrayList();
 
-    public ObservableList<String> getScannedContent() {
-        return scannedContent;
+    public ObservableList<BarcodeListItem> getBarcodes() {
+        return barcodes;
     }
 
-    public void addScannedContent(@NotNull final String content) {
-        Objects.requireNonNull(content, "Content must not be null");
-        scannedContent.add(content);
+    public void addBarcode(@NotNull final BarcodeListItem barcode) {
+        Objects.requireNonNull(barcode, "barcode must not be null");
+        this.barcodes.add(barcode);
     }
 
-    public void clearScannedContent() {
-        scannedContent.clear();
+    public void clearBarcodes() {
+        barcodes.clear();
     }
 }

@@ -13,25 +13,23 @@ import javax.imageio.ImageIO;
 
 import org.junit.jupiter.api.Test;
 
+import com.google.zxing.BarcodeFormat;
+
 class BarcodeProcessorTest {
     @Test
     void whenNoBarcodeInImage_thenEmptyResult() {
         BufferedImage image = new BufferedImage(640, 480, TYPE_INT_RGB);
-        Optional<String> result = BarcodeProcessor.process(image);
+        Optional<BarcodeResult> result = BarcodeProcessor.process(image);
         assertThat(result).isEmpty();
     }
 
     @Test
     void whenValidBarcodeInImage_thenValidResult() throws IOException {
-        BufferedImage image =
-                ImageIO.read(
-                        new File(
-                                Objects.requireNonNull(
-                                                getClass()
-                                                        .getClassLoader()
-                                                        .getResource("Test_QR.png"))
-                                        .getFile()));
-        Optional<String> result = BarcodeProcessor.process(image);
-        assertThat(result).isNotEmpty().get().isEqualTo("test");
+        BufferedImage image = ImageIO.read(
+                new File(Objects.requireNonNull(getClass().getClassLoader().getResource("Test_QR.png")).getFile()));
+        Optional<BarcodeResult> result = BarcodeProcessor.process(image);
+        assertThat(result).isNotEmpty();
+        assertThat(result.get()).extracting(BarcodeResult::format, BarcodeResult::text, BarcodeResult::image)
+                .containsExactly(BarcodeFormat.QR_CODE, "test", image);
     }
 }
