@@ -37,7 +37,7 @@
         <webcam-capture.version>0.3.12</webcam-capture.version>
 
         <!-- Barcode -->
-        <zxing.version>3.5.0</zxing.version>
+        <zxing.version>3.5.1</zxing.version>
 
         <!-- Logging -->
         <logback.version>1.4.4</logback.version>
