@@ -54,7 +54,7 @@
         <junit.version>5.9.1</junit.version>
         <assertj.version>3.23.1</assertj.version>
         <mockito.version>4.8.0</mockito.version>
-        <pitest.version>1.9.8</pitest.version>
+        <pitest.version>1.10.3</pitest.version>
         <pitest-junit.version>1.0.0</pitest-junit.version>
 
         <!-- Maven Plugins -->
