@@ -1,6 +1,6 @@
 # Barcodes
 
-This application allows you to scan barcodes using your webcam.
+This application allows you to generate and scan barcodes using your webcam.
 
 # Screenshots
 
