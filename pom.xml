@@ -27,7 +27,7 @@
         <maven.compiler.release>${java.version}</maven.compiler.release>
 
         <!-- Spring -->
-        <spring-boot.version>2.7.5</spring-boot.version>
+        <spring-boot.version>2.7.18</spring-boot.version>
 
         <!-- JavaFX -->
         <javafx.version>19</javafx.version>
