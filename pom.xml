@@ -30,7 +30,7 @@
         <spring-boot.version>2.7.5</spring-boot.version>
 
         <!-- JavaFX -->
-        <javafx.version>19</javafx.version>
+        <javafx.version>19.0.2.1</javafx.version>
         <controlsfx.version>11.1.2</controlsfx.version>
 
         <!-- Webcam -->
