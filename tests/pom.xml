@@ -16,8 +16,8 @@
 
     <properties>
         <!-- Testing -->
-        <testfx.version>4.0.16-alpha</testfx.version>
-        <openjfx-monocle.version>jdk-12.0.1+2</openjfx-monocle.version>
+        <testfx.version>4.0.18</testfx.version>
+        <openjfx-monocle.version>17.0.10</openjfx-monocle.version>
     </properties>
 
     <dependencies>
