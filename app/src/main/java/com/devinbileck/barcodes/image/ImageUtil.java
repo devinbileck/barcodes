@@ -1,9 +1,6 @@
 package com.devinbileck.barcodes.image;
 
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class ImageUtil {
@@ -40,7 +37,7 @@ public class ImageUtil {
         Graphics graphics = bufferedImage.getGraphics();
 
         Rectangle rect = new Rectangle(width, height);
-        drawCenteredString(graphics, text, rect, graphics.getFont());
+        drawCenteredString(graphics, text, rect, new Font("Courier New", Font.PLAIN, 16));
 
         return bufferedImage;
     }
