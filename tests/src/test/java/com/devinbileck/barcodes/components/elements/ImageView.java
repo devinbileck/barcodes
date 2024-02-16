@@ -7,12 +7,12 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+
 import org.testfx.util.WaitForAsyncUtils;
 
 import com.devinbileck.barcodes.components.views.View;
-
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
 
 public class ImageView extends Element<javafx.scene.image.ImageView> {
     public ImageView(View view, String query) {

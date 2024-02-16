@@ -1,8 +1,7 @@
 package com.devinbileck.barcodes.ui.views.scanbarcode;
 
-import com.devinbileck.barcodes.barcode.BarcodeProcessor;
-import com.devinbileck.barcodes.barcode.BarcodeResult;
-import com.devinbileck.barcodes.webcam.WebcamService;
+import java.util.function.Consumer;
+
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -15,12 +14,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import net.rgielen.fxweaver.core.FxmlView;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.function.Consumer;
+import com.devinbileck.barcodes.barcode.BarcodeProcessor;
+import com.devinbileck.barcodes.barcode.BarcodeResult;
+import com.devinbileck.barcodes.webcam.WebcamService;
+
+import net.rgielen.fxweaver.core.FxmlView;
 
 @Component
 @FxmlView("ScanBarcodeView.fxml")

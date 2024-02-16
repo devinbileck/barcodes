@@ -1,13 +1,14 @@
 package com.devinbileck.barcodes.barcode;
 
-import com.google.zxing.*;
-import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-import com.google.zxing.common.HybridBinarizer;
-
-import javax.validation.constraints.NotNull;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 import java.util.Optional;
+
+import javax.validation.constraints.NotNull;
+
+import com.google.zxing.*;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 
 public class BarcodeProcessor {
     private BarcodeProcessor() {

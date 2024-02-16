@@ -1,9 +1,9 @@
 package com.devinbileck.barcodes.ui.views.generatebarcode;
 
-import com.devinbileck.barcodes.barcode.BarcodeGenerator;
-import com.devinbileck.barcodes.barcode.BarcodeResult;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
+import java.awt.image.BufferedImage;
+import java.util.Optional;
+import java.util.function.Consumer;
+
 import javafx.beans.binding.Bindings;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
@@ -14,14 +14,18 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import net.rgielen.fxweaver.core.FxmlView;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.awt.image.BufferedImage;
-import java.util.Optional;
-import java.util.function.Consumer;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+
+import com.devinbileck.barcodes.barcode.BarcodeGenerator;
+import com.devinbileck.barcodes.barcode.BarcodeResult;
+
+import net.rgielen.fxweaver.core.FxmlView;
 
 @Component
 @FxmlView("GenerateBarcodeView.fxml")

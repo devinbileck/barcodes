@@ -6,17 +6,18 @@ import java.util.Optional;
 
 import javax.validation.constraints.NotNull;
 
-import org.springframework.stereotype.Component;
-
-import com.devinbileck.barcodes.barcode.BarcodeResult;
-import com.google.zxing.BarcodeFormat;
-
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import org.springframework.stereotype.Component;
+
+import com.google.zxing.BarcodeFormat;
+
+import com.devinbileck.barcodes.barcode.BarcodeResult;
 
 @Component
 public class GenerateBarcodeViewModel {

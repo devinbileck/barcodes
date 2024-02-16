@@ -6,26 +6,22 @@ import java.time.format.DateTimeFormatter;
 
 import javax.validation.constraints.NotNull;
 
-import org.springframework.stereotype.Component;
-
-import com.devinbileck.barcodes.ui.views.generatebarcode.GenerateBarcodeViewController;
-import com.devinbileck.barcodes.ui.views.scanbarcode.ScanBarcodeViewController;
-
 import javafx.beans.binding.Bindings;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import org.springframework.stereotype.Component;
+
+import com.devinbileck.barcodes.ui.views.generatebarcode.GenerateBarcodeViewController;
+import com.devinbileck.barcodes.ui.views.scanbarcode.ScanBarcodeViewController;
+
 import net.rgielen.fxweaver.core.FxControllerAndView;
 import net.rgielen.fxweaver.core.FxmlView;
 

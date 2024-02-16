@@ -1,11 +1,12 @@
 package com.devinbileck.barcodes.image;
 
-import javafx.scene.image.Image;
-
-import javax.validation.constraints.NotNull;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
+
+import javax.validation.constraints.NotNull;
+
+import javafx.scene.image.Image;
 
 public class IconFactory {
     private static final Map<ICON, Image> images = new EnumMap<>(ICON.class);
