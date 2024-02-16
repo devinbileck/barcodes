@@ -11,9 +11,8 @@ import org.junit.jupiter.params.provider.EnumSource;
 
 class IconFactoryTest {
     @Test
-    void whenGettingNullIcon_thenExceptionThrown() {
-        //noinspection ConstantConditions
-        assertThrows(NullPointerException.class, () -> IconFactory.getImage(null));
+    void whenGettingNullIcon_thenNullReturned() {
+        assertThat(IconFactory.getImage(null)).isNull();
     }
 
     @ParameterizedTest
