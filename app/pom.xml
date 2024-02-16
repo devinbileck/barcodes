@@ -165,8 +165,7 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>**/ui/views/**/*ViewController.class</exclude>
-                        <exclude>**/ui/views/scanbarcode/WebcamListItem.class</exclude>
+                        <exclude>**/ui/views/**/*ViewController*.class</exclude>
                         <exclude>**/ui/PrimaryStageInitializer.class</exclude>
                         <exclude>**/ui/StageReadyEvent.class</exclude>
                         <exclude>**/ui/UiApplication.class</exclude>

@@ -8,11 +8,10 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import com.devinbileck.barcodes.barcode.BarcodeResult;
-import com.devinbileck.barcodes.image.ImageUtil;
 import com.google.zxing.BarcodeFormat;
 
-import javafx.embed.swing.SwingFXUtils;
+import com.devinbileck.barcodes.barcode.BarcodeResult;
+import com.devinbileck.barcodes.image.ImageUtil;
 
 class GenerateBarcodeViewModelTest {
     private final GenerateBarcodeViewModel viewModel = new GenerateBarcodeViewModel();
@@ -45,5 +44,19 @@ class GenerateBarcodeViewModelTest {
         viewModel.setSpecifiedContent("test");
         viewModel.setSpecifiedFormat(new BarcodeFormatListItem(BarcodeFormat.QR_CODE));
         assertThat(viewModel.canGenerate().get()).isTrue();
+    }
+
+    @Test
+    void whenNecessaryFieldsAreNotSet_thenCanNotGenerate() {
+        viewModel.setSpecifiedContent("");
+        viewModel.setSpecifiedFormat(null);
+        assertThat(viewModel.canGenerate().get()).isFalse();
+    }
+
+    @Test
+    void whenNecessaryFieldsArePartiallySet_thenCanNotGenerate() {
+        viewModel.setSpecifiedContent("test");
+        viewModel.setSpecifiedFormat(null);
+        assertThat(viewModel.canGenerate().get()).isFalse();
     }
 }
