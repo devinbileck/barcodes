@@ -1,12 +1,11 @@
 package com.devinbileck.barcodes.image;
 
+import javafx.scene.image.Image;
+
+import javax.validation.constraints.NotNull;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
-
-import javafx.scene.image.Image;
-
-import lombok.NonNull;
 
 public class IconFactory {
     private static final Map<ICON, Image> images = new EnumMap<>(ICON.class);
@@ -17,7 +16,7 @@ public class IconFactory {
         TRASH
     }
 
-    public static Image getImage(@NonNull final ICON icon) {
+    public static Image getImage(@NotNull final ICON icon) {
         switch (icon) {
             case APP -> images.putIfAbsent(
                     icon,

@@ -1,37 +1,33 @@
 package com.devinbileck.barcodes.ui.views.generatebarcode;
 
-import java.awt.image.BufferedImage;
-import java.util.Optional;
-import java.util.function.Consumer;
-
-import org.springframework.stereotype.Component;
-
 import com.devinbileck.barcodes.barcode.BarcodeGenerator;
 import com.devinbileck.barcodes.barcode.BarcodeResult;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
-
 import javafx.beans.binding.Bindings;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import lombok.extern.slf4j.Slf4j;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
-@Slf4j
+import java.awt.image.BufferedImage;
+import java.util.Optional;
+import java.util.function.Consumer;
+
 @Component
 @FxmlView("GenerateBarcodeView.fxml")
 public class GenerateBarcodeViewController {
+    private static final Logger LOG = LoggerFactory.getLogger(GenerateBarcodeViewController.class);
+
     private final GenerateBarcodeViewModel viewModel;
 
     private Stage stage;
@@ -102,7 +98,7 @@ public class GenerateBarcodeViewController {
                         Optional.of(new BarcodeResult(barcodeFormat, barcodeContent, generatedImage)));
                 errorLabel.setText("");
             } catch (WriterException | IllegalArgumentException e) {
-                log.error("Unable to generate barcode of type [{}]: {}", barcodeFormat, e.getMessage());
+                LOG.error("Unable to generate barcode of type [{}]: {}", barcodeFormat, e.getMessage());
                 errorLabel.setText(e.getMessage());
                 viewModel.setGeneratedResult(Optional.empty());
             }

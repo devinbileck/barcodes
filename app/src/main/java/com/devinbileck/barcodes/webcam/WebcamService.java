@@ -1,21 +1,17 @@
 package com.devinbileck.barcodes.webcam;
 
-import java.awt.Dimension;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamException;
+import com.github.sarxos.webcam.WebcamResolution;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
-
-import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamException;
-import com.github.sarxos.webcam.WebcamResolution;
-
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @org.springframework.stereotype.Service
 public class WebcamService extends Service<BufferedImage> {
     private static final WebcamResolution DEFAULT_RESOLUTION = WebcamResolution.VGA;
