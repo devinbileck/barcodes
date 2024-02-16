@@ -1,20 +1,19 @@
 package com.devinbileck.barcodes.ui;
 
+import com.devinbileck.barcodes.MainApplication;
+import com.devinbileck.barcodes.image.IconFactory;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
-
-import com.devinbileck.barcodes.MainApplication;
-import com.devinbileck.barcodes.image.IconFactory;
 
 public class UiApplication extends Application {
     private ConfigurableApplicationContext context;
 
     @Override
     public void init() {
+        System.setProperty("org.springframework.boot.logging.LoggingSystem", "none");
         //noinspection ZeroLengthArrayAllocation
         this.context =
                 new SpringApplicationBuilder()
