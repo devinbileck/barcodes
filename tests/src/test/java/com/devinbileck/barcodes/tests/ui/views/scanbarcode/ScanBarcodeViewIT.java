@@ -7,16 +7,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.framework.junit5.ApplicationExtension;
 
 import com.devinbileck.barcodes.components.views.main.MainView;
 import com.devinbileck.barcodes.components.views.scanbarcode.ScanBarcodeView;
-import com.devinbileck.barcodes.tests.ui.views.ViewIT;
+import com.devinbileck.barcodes.extensions.UiApplicationExtension;
 import com.devinbileck.barcodes.webcam.DisconnectedWebcamDeviceFake;
 
-class ScanBarcodeViewIT extends ViewIT {
+@ExtendWith(UiApplicationExtension.class)
+class ScanBarcodeViewIT {
     @Nested
-    @ExtendWith(ApplicationExtension.class)
     class NoWebcamsDiscovered {
         @BeforeEach
         void setup() throws TimeoutException {
@@ -54,7 +53,6 @@ class ScanBarcodeViewIT extends ViewIT {
     }
 
     @Nested
-    @ExtendWith(ApplicationExtension.class)
     class WebcamsDiscovered {
         @BeforeEach
         void setup() throws TimeoutException {

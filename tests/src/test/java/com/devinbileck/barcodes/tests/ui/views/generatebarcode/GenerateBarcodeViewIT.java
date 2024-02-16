@@ -11,19 +11,19 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.framework.junit5.ApplicationExtension;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
 
 import com.devinbileck.barcodes.barcode.BarcodeGenerator;
 import com.devinbileck.barcodes.components.views.generatebarcode.GenerateBarcodeView;
 import com.devinbileck.barcodes.components.views.main.MainView;
+import com.devinbileck.barcodes.extensions.UiApplicationExtension;
 import com.devinbileck.barcodes.image.ImageUtil;
-import com.devinbileck.barcodes.tests.ui.views.ViewIT;
 import com.devinbileck.barcodes.ui.views.generatebarcode.BarcodeFormatListItem;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
 
-@ExtendWith(ApplicationExtension.class)
-class GenerateBarcodeViewIT extends ViewIT {
+@ExtendWith(UiApplicationExtension.class)
+class GenerateBarcodeViewIT {
     @BeforeEach
     void setup() throws TimeoutException {
         if (GenerateBarcodeView.getInstance().isShowing()) {
