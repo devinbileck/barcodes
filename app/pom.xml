@@ -19,8 +19,8 @@
         <simulation.fakeWebcams>false</simulation.fakeWebcams>
 
         <!-- JavaFX -->
-        <formsfx.version>11.5.0</formsfx.version>
-        <validatorfx.version>0.4.0</validatorfx.version>
+        <formsfx.version>11.6.0</formsfx.version>
+        <validatorfx.version>0.4.2</validatorfx.version>
         <bootstrapfx.version>0.4.0</bootstrapfx.version>
         <fxweaver.version>1.3.0</fxweaver.version>
 
