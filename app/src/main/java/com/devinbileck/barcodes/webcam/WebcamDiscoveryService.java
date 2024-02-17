@@ -20,6 +20,7 @@ import com.devinbileck.barcodes.config.Configuration;
 @Service
 public class WebcamDiscoveryService {
     private static final Logger LOG = LoggerFactory.getLogger(WebcamDiscoveryService.class);
+    public static final long SIMULATED_WEBCAM_GET_IMAGE_DELAY_MILLIS = 5_000L;
 
     public List<Webcam> getWebcams() {
         if (!Configuration.isSimulationEnabled()) {
@@ -41,8 +42,8 @@ public class WebcamDiscoveryService {
         }
 
         List<Webcam> webcams = new ArrayList<>();
-        webcams.add(new WebcamFake(new WebcamDeviceFake(qrCodeImage)));
-        webcams.add(new WebcamFake(new DisconnectedWebcamDeviceFake()));
+        webcams.add(new WebcamFake(new WebcamDeviceFake(qrCodeImage, SIMULATED_WEBCAM_GET_IMAGE_DELAY_MILLIS)));
+        webcams.add(new WebcamFake(new DisconnectedWebcamDeviceFake(SIMULATED_WEBCAM_GET_IMAGE_DELAY_MILLIS)));
         webcams.add(
                 new WebcamFake(
                         new NonOpeningWebcamDeviceFake(
