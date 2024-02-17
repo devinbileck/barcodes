@@ -24,21 +24,21 @@ class ImageUtilTest {
     void whenComparingIdenticalImages_thenResultIsTrue() {
         BufferedImage image1 = createImage(640, 480, Color.RED);
         BufferedImage image2 = createImage(640, 480, Color.RED);
-        assertThat(ImageUtil.isImagesIdentical(image1, image2)).isTrue();
+        assertThat(isImagesIdentical(image1, image2)).isTrue();
     }
 
     @Test
     void whenComparingSimilarImagesWithDifferingDimensions_thenResultIsFalse() {
         BufferedImage image1 = createImage(640, 480, Color.RED);
         BufferedImage image2 = createImage(1024, 720, Color.RED);
-        assertThat(ImageUtil.isImagesIdentical(image1, image2)).isFalse();
+        assertThat(isImagesIdentical(image1, image2)).isFalse();
     }
 
     @Test
     void whenComparingImagesWithDifferingPixels_thenResultIsFalse() {
         BufferedImage image1 = createImage(640, 480, Color.RED);
         BufferedImage image2 = createImage(640, 480, Color.BLACK);
-        assertThat(ImageUtil.isImagesIdentical(image1, image2)).isFalse();
+        assertThat(isImagesIdentical(image1, image2)).isFalse();
     }
 
     @Test
@@ -48,10 +48,12 @@ class ImageUtilTest {
 
     @ParameterizedTest
     @CsvSource({
-        "'', 640, 480, Blank_Image.png",
-        "Short Text, 640, 480, Short_Text_Image.png",
-        "This is long text for testing purposes to ensure the image is generated correctly, 640,"
-                + " 480, Long_Text_Image.png",
+            "'', 640, 480, Blank_Image.png",
+            "Short Text, 640, 480, Short_Text_Image.png",
+            "This is extra long text for testing purposes to ensure the image is generated with the long text shown" +
+                    " wrapped on word boundaries across multiple lines and centered both horizontally and vertically" +
+                    " within the overall image" +
+                    ", 640, 480, Long_Text_Image.png",
     })
     void whenGeneratingTextImage_imageIsGenerated(
             String text, int width, int height, String resourceName) throws IOException {
