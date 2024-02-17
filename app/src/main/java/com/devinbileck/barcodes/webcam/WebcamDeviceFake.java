@@ -126,7 +126,7 @@ public class WebcamDeviceFake implements WebcamDevice {
                             "%s",
                             getImageDelayMillis + getImageTimestamp - System.currentTimeMillis());
             return ImageUtil.generateTextImage(
-                    countDownText, (int) resolution.getWidth(), (int) resolution.getHeight());
+                    countDownText, 640, 480);
         }
 
         getImageTimestamp = 0;
