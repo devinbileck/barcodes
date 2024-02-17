@@ -29,7 +29,7 @@ public class ListView extends Element<javafx.scene.control.ListView> {
             throws ExecutionException, InterruptedException, TimeoutException {
         runInFxThread(() -> view.getWindow().lookup(query).queryListView().getItems().add(item));
         // TODO Find a better solution than this hack to ensure the UI updates before interacting
-        // with the item
+        //  with the item
         Thread.sleep(50);
     }
 
@@ -78,7 +78,7 @@ public class ListView extends Element<javafx.scene.control.ListView> {
                     //            }
 
                     // TODO find a better solution than this hack to ensure the menu appears before
-                    // interacting with the item
+                    //  interacting with the item
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {

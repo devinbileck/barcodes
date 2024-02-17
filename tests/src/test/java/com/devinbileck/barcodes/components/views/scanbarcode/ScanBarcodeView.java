@@ -16,7 +16,9 @@ public class ScanBarcodeView extends View {
 
     private static ScanBarcodeView instance = null;
 
-    private ScanBarcodeView() {}
+    private ScanBarcodeView() {
+        // this class cannot be instantiated
+    }
 
     public static ScanBarcodeView getInstance() {
         if (instance == null) {

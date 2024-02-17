@@ -3,7 +3,9 @@ package com.devinbileck.barcodes.config;
 import javax.validation.constraints.NotNull;
 
 public class Configuration {
-    private Configuration() {}
+    private Configuration() {
+        // this class cannot be instantiated
+    }
 
     public static boolean isSimulationEnabled() {
         return isBooleanConfigOptionTrue("simulation.enabled");
@@ -21,7 +23,7 @@ public class Configuration {
         return Boolean.parseBoolean(value);
     }
 
-    private static String getSystemPropertyOrEnvironmentVariable(@NotNull String name) {
+    private static String getSystemPropertyOrEnvironmentVariable(@NotNull final String name) {
         String value = System.getProperty(name);
         if (value == null) {
             value = System.getenv(name);

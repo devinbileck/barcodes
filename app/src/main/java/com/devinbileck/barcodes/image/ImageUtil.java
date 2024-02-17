@@ -9,7 +9,9 @@ import java.io.InputStream;
 import java.util.Objects;
 
 public class ImageUtil {
-    private ImageUtil() {}
+    private ImageUtil() {
+        // this class cannot be instantiated
+    }
 
     /**
      * Compares two images pixel by pixel.

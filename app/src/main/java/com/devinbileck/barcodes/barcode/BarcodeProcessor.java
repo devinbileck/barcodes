@@ -12,6 +12,7 @@ import com.google.zxing.common.HybridBinarizer;
 
 public class BarcodeProcessor {
     private BarcodeProcessor() {
+        // this class cannot be instantiated
     }
 
     public static Optional<BarcodeResult> process(final @NotNull BufferedImage image) {

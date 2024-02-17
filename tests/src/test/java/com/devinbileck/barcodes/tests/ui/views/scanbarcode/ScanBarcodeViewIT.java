@@ -11,7 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import com.devinbileck.barcodes.components.views.main.MainView;
 import com.devinbileck.barcodes.components.views.scanbarcode.ScanBarcodeView;
 import com.devinbileck.barcodes.extensions.UiApplicationExtension;
-import com.devinbileck.barcodes.webcam.DisconnectedWebcamDeviceFake;
+
+import static com.devinbileck.barcodes.webcam.WebcamDiscoveryService.SIMULATED_WEBCAM_GET_IMAGE_DELAY_MILLIS;
 
 @ExtendWith(UiApplicationExtension.class)
 class ScanBarcodeViewIT {
@@ -106,7 +107,7 @@ class ScanBarcodeViewIT {
             ScanBarcodeView.getInstance()
                     .webcamImageView
                     .waitUntilNull(
-                            (int) (DisconnectedWebcamDeviceFake.GET_IMAGE_DELAY_MILLIS / 1000) + 1);
+                            (int) (SIMULATED_WEBCAM_GET_IMAGE_DELAY_MILLIS / 1000) + 1);
             ScanBarcodeView.getInstance().webcamImageView.waitUntilNotShown(1);
             ScanBarcodeView.getInstance()
                     .webcamStatusLabel

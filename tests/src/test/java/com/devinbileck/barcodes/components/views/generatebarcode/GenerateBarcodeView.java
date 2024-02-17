@@ -4,7 +4,6 @@ import com.devinbileck.barcodes.components.elements.Button;
 import com.devinbileck.barcodes.components.elements.ComboBox;
 import com.devinbileck.barcodes.components.elements.ImageView;
 import com.devinbileck.barcodes.components.elements.TextArea;
-import com.devinbileck.barcodes.components.elements.TextField;
 import com.devinbileck.barcodes.components.views.View;
 
 public class GenerateBarcodeView extends View {
@@ -19,6 +18,7 @@ public class GenerateBarcodeView extends View {
     private static GenerateBarcodeView instance = null;
 
     private GenerateBarcodeView() {
+        // this class cannot be instantiated
     }
 
     public static GenerateBarcodeView getInstance() {

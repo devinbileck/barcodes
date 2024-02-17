@@ -122,7 +122,7 @@ public class ScanBarcodeViewController {
                     }
                     LOG.error(exception);
                     if (exception.contains("Failed to get image")) {
-                        webcamStatusLabel.setText("Failed to get image from webcam. Is it" + " disconnected?");
+                        webcamStatusLabel.setText("Failed to get image from webcam. Is it disconnected?");
                     } else {
                         webcamStatusLabel.setText("Failed to load webcam");
                     }
