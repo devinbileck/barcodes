@@ -27,7 +27,7 @@ public class JavaFxServiceUtil<V> {
      *
      * @param service the {@link Service} that you want to work with
      */
-    public JavaFxServiceUtil(Service<V> service) {
+    public JavaFxServiceUtil(final Service<V> service) {
         this(service, DEFAULT_TIMEOUT_MILLIS);
     }
 
@@ -35,7 +35,7 @@ public class JavaFxServiceUtil<V> {
      * @param service the {@link Service} that you want to work with
      * @param timeout the maximum time to wait for the service in milliseconds
      */
-    public JavaFxServiceUtil(Service<V> service, long timeout) {
+    public JavaFxServiceUtil(final Service<V> service, long timeout) {
         this.service = service;
         this.timeout = timeout;
     }
@@ -46,7 +46,7 @@ public class JavaFxServiceUtil<V> {
      * @return {@link ServiceStatus} representing the status of the service when it transitioned to
      *     the desired state.
      */
-    public ServiceStatus<V> waitForServiceDesiredState(Worker.State desiredState) {
+    public ServiceStatus<V> waitForServiceDesiredState(final Worker.State desiredState) {
         CompletableFuture<ServiceStatus<V>> stateCompletableFuture =
                 createDesiredStateCompletableFuture(desiredState);
         return getFuture(stateCompletableFuture, "Service did not change state to " + desiredState);
@@ -58,7 +58,7 @@ public class JavaFxServiceUtil<V> {
      * @return {@link ServiceStatus} representing the status of the service when it updated its
      *     value.
      */
-    public ServiceStatus<V> waitForServiceUpdateValue(V currentValue) {
+    public ServiceStatus<V> waitForServiceUpdateValue(final V currentValue) {
         CompletableFuture<ServiceStatus<V>> valueUpdateCompletableFuture =
                 createValueUpdateCompletableFuture(currentValue);
         return getFuture(valueUpdateCompletableFuture, "Service did not update its value");
@@ -81,7 +81,7 @@ public class JavaFxServiceUtil<V> {
      * future to complete, and then returns its result.
      */
     private ServiceStatus<V> getFuture(
-            CompletableFuture<ServiceStatus<V>> completableFuture, String assertionErrorMessage) {
+            final CompletableFuture<ServiceStatus<V>> completableFuture, final String assertionErrorMessage) {
         try {
             return completableFuture.get(timeout, TimeUnit.MILLISECONDS);
         } catch (TimeoutException | InterruptedException | ExecutionException e) {
@@ -94,7 +94,7 @@ public class JavaFxServiceUtil<V> {
      * a desired state, returning the status of the service at that given time.
      */
     private CompletableFuture<ServiceStatus<V>> createDesiredStateCompletableFuture(
-            Worker.State desiredState) {
+            final Worker.State desiredState) {
         CompletableFuture<ServiceStatus<V>> completableFuture = new CompletableFuture<>();
         Platform.runLater(
                 () -> {
@@ -116,7 +116,7 @@ public class JavaFxServiceUtil<V> {
      * Creates a {@link CompletableFuture} that informs us when the value of the service has
      * changed, returning the status of the service at that given time.
      */
-    private CompletableFuture<ServiceStatus<V>> createValueUpdateCompletableFuture(V currentValue) {
+    private CompletableFuture<ServiceStatus<V>> createValueUpdateCompletableFuture(final V currentValue) {
         CompletableFuture<ServiceStatus<V>> completableFuture = new CompletableFuture<>();
         Platform.runLater(
                 () -> {

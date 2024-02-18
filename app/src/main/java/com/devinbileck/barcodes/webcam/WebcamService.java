@@ -6,15 +6,15 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamException;
 import com.github.sarxos.webcam.WebcamResolution;
+import org.springframework.stereotype.Service;
 
-@org.springframework.stereotype.Service
-public class WebcamService extends Service<BufferedImage> {
+@Service
+public class WebcamService extends javafx.concurrent.Service<BufferedImage> {
     private static final WebcamResolution DEFAULT_RESOLUTION = WebcamResolution.VGA;
     private Webcam webcam;
     private Dimension resolution;
@@ -50,7 +50,7 @@ public class WebcamService extends Service<BufferedImage> {
         return webcam;
     }
 
-    public void setWebcam(Webcam webcam) {
+    public void setWebcam(final Webcam webcam) {
         if (isRunning()) {
             throw new IllegalStateException("Service must be stopped in order to set webcam");
         }
@@ -68,7 +68,7 @@ public class WebcamService extends Service<BufferedImage> {
         return resolution;
     }
 
-    public void setResolution(Dimension resolution) {
+    public void setResolution(final Dimension resolution) {
         if (isRunning()) {
             throw new IllegalStateException("Service must be stopped in order to set resolution");
         }

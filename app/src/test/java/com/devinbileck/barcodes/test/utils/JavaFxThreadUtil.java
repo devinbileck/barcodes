@@ -28,7 +28,7 @@ public final class JavaFxThreadUtil {
      *
      * @param code the code to execute on the JavaFX thread
      */
-    public static void runInFxThread(Runnable code)
+    public static void runInFxThread(final Runnable code)
             throws ExecutionException, InterruptedException, TimeoutException {
         runInFxThread(code, DEFAULT_TIMEOUT_MILLIS);
     }
@@ -39,7 +39,7 @@ public final class JavaFxThreadUtil {
      * @param code the code to execute on the JavaFX thread
      * @param timeout the maximum time to wait in milliseconds before execution is aborted
      */
-    public static void runInFxThread(Runnable code, long timeout)
+    public static void runInFxThread(final Runnable code, final long timeout)
             throws ExecutionException, InterruptedException, TimeoutException {
         CompletableFuture<Object> future = new CompletableFuture<>();
 
@@ -79,7 +79,7 @@ public final class JavaFxThreadUtil {
      *
      * @param timeout the maximum time to wait in milliseconds
      */
-    public static void waitForUiThread(long timeout)
+    public static void waitForUiThread(final long timeout)
             throws ExecutionException, InterruptedException, TimeoutException {
         runInFxThread(() -> {}, timeout);
     }
