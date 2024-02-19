@@ -11,9 +11,11 @@ import java.awt.image.BufferedImage;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
+import com.devinbileck.barcodes.test.fakes.WebcamDriverFake;
 import javafx.application.Platform;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -37,6 +39,11 @@ class WebcamServiceTest {
             new WhenTheWebcamService(webcamService);
     private final ThenTheWebcamService thenTheWebcamService =
             new ThenTheWebcamService(webcamService);
+
+    @BeforeAll
+    static void setDriver() {
+        Webcam.setDriver(new WebcamDriverFake());
+    }
 
     @AfterEach
     void cleanup() {

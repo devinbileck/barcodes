@@ -26,10 +26,7 @@ public class WebcamDiscoveryService {
         if (!Configuration.isSimulationEnabled()) {
             return Webcam.getWebcams();
         }
-        if (Configuration.isSimulationFakeWebcams()) {
-            return simulatedWebcams();
-        }
-        return Collections.emptyList();
+        return Configuration.isSimulationFakeWebcams() ? simulatedWebcams() : Collections.emptyList();
     }
 
     private List<Webcam> simulatedWebcams() {

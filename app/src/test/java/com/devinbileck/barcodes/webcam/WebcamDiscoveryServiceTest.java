@@ -4,12 +4,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
+import com.devinbileck.barcodes.test.fakes.WebcamDriverFake;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.github.sarxos.webcam.Webcam;
 
 class WebcamDiscoveryServiceTest {
     private final WebcamDiscoveryService webcamDiscoveryService = new WebcamDiscoveryService();
+
+    @BeforeAll
+    static void setDriver() {
+        Webcam.setDriver(new WebcamDriverFake());
+    }
 
     @Test
     void whenGettingWebcamsInSimulationModeWithFakeWebcams_thenFakeWebcamsReturned() {

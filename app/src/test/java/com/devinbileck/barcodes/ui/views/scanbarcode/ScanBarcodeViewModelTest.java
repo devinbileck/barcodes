@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.List;
 
+import com.devinbileck.barcodes.test.fakes.WebcamDriverFake;
 import javafx.application.Platform;
 
 import org.junit.jupiter.api.AfterEach;
@@ -41,6 +42,7 @@ class ScanBarcodeViewModelTest {
     @BeforeAll
     static void init() {
         System.setProperty("simulation.enabled", "false");
+        Webcam.setDriver(new WebcamDriverFake());
     }
 
     @AfterEach
