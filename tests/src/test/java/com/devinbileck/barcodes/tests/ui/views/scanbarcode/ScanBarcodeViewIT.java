@@ -1,5 +1,7 @@
 package com.devinbileck.barcodes.tests.ui.views.scanbarcode;
 
+import static com.devinbileck.barcodes.webcam.WebcamDiscoveryService.SIMULATED_WEBCAM_GET_IMAGE_DELAY_MILLIS;
+
 import java.util.concurrent.TimeoutException;
 
 import org.junit.jupiter.api.AfterEach;
@@ -7,16 +9,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.framework.junit5.ApplicationExtension;
 
 import com.devinbileck.barcodes.components.views.main.MainView;
 import com.devinbileck.barcodes.components.views.scanbarcode.ScanBarcodeView;
-import com.devinbileck.barcodes.tests.ui.views.ViewIT;
-import com.devinbileck.barcodes.webcam.DisconnectedWebcamDeviceFake;
+import com.devinbileck.barcodes.extensions.UiApplicationExtension;
 
-class ScanBarcodeViewIT extends ViewIT {
+@ExtendWith(UiApplicationExtension.class)
+class ScanBarcodeViewIT {
     @Nested
-    @ExtendWith(ApplicationExtension.class)
     class NoWebcamsDiscovered {
         @BeforeEach
         void setup() throws TimeoutException {
@@ -54,7 +54,6 @@ class ScanBarcodeViewIT extends ViewIT {
     }
 
     @Nested
-    @ExtendWith(ApplicationExtension.class)
     class WebcamsDiscovered {
         @BeforeEach
         void setup() throws TimeoutException {
@@ -108,7 +107,7 @@ class ScanBarcodeViewIT extends ViewIT {
             ScanBarcodeView.getInstance()
                     .webcamImageView
                     .waitUntilNull(
-                            (int) (DisconnectedWebcamDeviceFake.GET_IMAGE_DELAY_MILLIS / 1000) + 1);
+                            (int) (SIMULATED_WEBCAM_GET_IMAGE_DELAY_MILLIS / 1000) + 1);
             ScanBarcodeView.getInstance().webcamImageView.waitUntilNotShown(1);
             ScanBarcodeView.getInstance()
                     .webcamStatusLabel

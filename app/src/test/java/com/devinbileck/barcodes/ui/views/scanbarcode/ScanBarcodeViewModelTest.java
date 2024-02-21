@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIf;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.MockedStatic;
 
@@ -20,6 +21,7 @@ import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamDevice;
 
 import com.devinbileck.barcodes.test.extensions.JavaFxToolkitExtension;
+import com.devinbileck.barcodes.test.fakes.WebcamDriverFake;
 import com.devinbileck.barcodes.test.statements.GivenAWebcamService;
 import com.devinbileck.barcodes.test.statements.WhenTheWebcamService;
 import com.devinbileck.barcodes.webcam.WebcamDeviceFake;
@@ -28,6 +30,8 @@ import com.devinbileck.barcodes.webcam.WebcamFake;
 import com.devinbileck.barcodes.webcam.WebcamService;
 
 @ExtendWith(JavaFxToolkitExtension.class)
+@DisabledIf(value = "java.awt.GraphicsEnvironment#isHeadless",
+        disabledReason = "Headless environment is unable to open DISPLAY while running in Fx thread")
 class ScanBarcodeViewModelTest {
     private final BufferedImage bufferedImage = new BufferedImage(640, 480, TYPE_INT_RGB);
     private final WebcamService webcamService = new WebcamService();
@@ -41,6 +45,7 @@ class ScanBarcodeViewModelTest {
     @BeforeAll
     static void init() {
         System.setProperty("simulation.enabled", "false");
+        Webcam.setDriver(new WebcamDriverFake());
     }
 
     @AfterEach

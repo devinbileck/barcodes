@@ -14,7 +14,9 @@ public class MainView extends View {
 
     private static MainView instance = null;
 
-    private MainView() {}
+    private MainView() {
+        // this class cannot be instantiated
+    }
 
     public static MainView getInstance() {
         if (instance == null) {

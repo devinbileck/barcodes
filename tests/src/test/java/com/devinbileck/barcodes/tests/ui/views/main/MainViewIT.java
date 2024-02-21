@@ -13,16 +13,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.framework.junit5.ApplicationExtension;
 
 import com.devinbileck.barcodes.components.views.generatebarcode.GenerateBarcodeView;
 import com.devinbileck.barcodes.components.views.main.MainView;
 import com.devinbileck.barcodes.components.views.scanbarcode.ScanBarcodeView;
-import com.devinbileck.barcodes.tests.ui.views.ViewIT;
+import com.devinbileck.barcodes.extensions.UiApplicationExtension;
 
-@ExtendWith(ApplicationExtension.class)
-class MainViewIT extends ViewIT {
-
+@ExtendWith(UiApplicationExtension.class)
+class MainViewIT {
     @BeforeEach
     void setup() throws ExecutionException, InterruptedException, TimeoutException {
         MainView.getInstance().listView.clearItems();

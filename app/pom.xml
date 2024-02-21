@@ -19,8 +19,8 @@
         <simulation.fakeWebcams>false</simulation.fakeWebcams>
 
         <!-- JavaFX -->
-        <formsfx.version>11.5.0</formsfx.version>
-        <validatorfx.version>0.4.0</validatorfx.version>
+        <formsfx.version>11.6.0</formsfx.version>
+        <validatorfx.version>0.4.2</validatorfx.version>
         <bootstrapfx.version>0.4.0</bootstrapfx.version>
         <fxweaver.version>1.3.0</fxweaver.version>
 
@@ -100,15 +100,19 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
 
         <!-- Misc -->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
+            <artifactId>commons-text</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.validation</groupId>
@@ -165,8 +169,8 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>**/ui/views/**/*ViewController.class</exclude>
-                        <exclude>**/ui/views/scanbarcode/WebcamListItem.class</exclude>
+                        <!-- Exclude UI centric classes that are not necessary to automate. -->
+                        <exclude>**/ui/views/**/*ViewController*.class</exclude>
                         <exclude>**/ui/PrimaryStageInitializer.class</exclude>
                         <exclude>**/ui/StageReadyEvent.class</exclude>
                         <exclude>**/ui/UiApplication.class</exclude>
@@ -189,10 +193,6 @@
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.pitest</groupId>
-                <artifactId>pitest-maven</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -228,6 +228,53 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>headless</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <!-- Exclude classes that currently cannot run in a headless environment
+                                (i.e. GitHub CI workflow) due to encountering
+                                "UnsupportedOperationException: Unable to open DISPLAY".-->
+                                <exclude>**/barcodes/webcam/WebcamService*.class</exclude>
+                                <exclude>**/barcodes/ui/views/scanbarcode/ScanBarcodeViewModel.class</exclude>
+                                <!-- Exclude UI centric classes that are not necessary to automate. -->
+                                <exclude>**/ui/views/**/*ViewController*.class</exclude>
+                                <exclude>**/ui/PrimaryStageInitializer.class</exclude>
+                                <exclude>**/ui/StageReadyEvent.class</exclude>
+                                <exclude>**/ui/UiApplication.class</exclude>
+                                <exclude>**/MainApplication.class</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>mutation-tests</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-maven</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <reporting>
         <plugins>

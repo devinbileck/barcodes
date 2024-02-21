@@ -19,10 +19,9 @@ public record BarcodeListItem(BarcodeFormat format, String content, long timesta
 
     @Override
     public boolean equals(Object otherObject) {
-        if (!(otherObject instanceof BarcodeListItem)) {
+        if (!(otherObject instanceof BarcodeListItem otherBarcodeListItem)) {
             return false;
         }
-        BarcodeListItem otherBarcodeListItem = (BarcodeListItem) otherObject;
         return Objects.equals(this.format, otherBarcodeListItem.format) && Objects.equals(this.content,
                 otherBarcodeListItem.content) && Objects.equals(this.timestamp, otherBarcodeListItem.timestamp)
                 && Objects.equals(this.image, otherBarcodeListItem.image);

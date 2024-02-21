@@ -2,13 +2,6 @@ package com.devinbileck.barcodes.ui.views.scanbarcode;
 
 import java.util.function.Consumer;
 
-import org.springframework.stereotype.Component;
-
-import com.devinbileck.barcodes.barcode.BarcodeProcessor;
-import com.devinbileck.barcodes.barcode.BarcodeResult;
-import com.devinbileck.barcodes.webcam.WebcamService;
-import com.google.zxing.Result;
-
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -21,13 +14,22 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import com.devinbileck.barcodes.barcode.BarcodeProcessor;
+import com.devinbileck.barcodes.barcode.BarcodeResult;
+import com.devinbileck.barcodes.webcam.WebcamService;
+
 import net.rgielen.fxweaver.core.FxmlView;
 
-@Slf4j
 @Component
 @FxmlView("ScanBarcodeView.fxml")
 public class ScanBarcodeViewController {
+    private static final Logger LOG = LoggerFactory.getLogger(ScanBarcodeViewController.class);
+
     private final ScanBarcodeViewModel viewModel;
     private final WebcamService webcamService;
 
@@ -118,9 +120,9 @@ public class ScanBarcodeViewController {
                     } else {
                         exception = String.valueOf(webcamService.getException());
                     }
-                    log.error(exception);
+                    LOG.error(exception);
                     if (exception.contains("Failed to get image")) {
-                        webcamStatusLabel.setText("Failed to get image from webcam. Is it" + " disconnected?");
+                        webcamStatusLabel.setText("Failed to get image from webcam. Is it disconnected?");
                     } else {
                         webcamStatusLabel.setText("Failed to load webcam");
                     }

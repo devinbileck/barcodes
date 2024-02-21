@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 import com.github.sarxos.webcam.WebcamResolution;
 
 class WebcamDeviceFakeTest {
+    private static final long GET_IMAGE_DELAY_MILLIS = 1_000L;
+
     private WebcamDeviceFake webcamDevice;
     private WebcamFake webcam;
     private BufferedImage img;
@@ -22,14 +24,14 @@ class WebcamDeviceFakeTest {
     @BeforeEach
     void setup() {
         img = new BufferedImage(640, 480, TYPE_INT_RGB);
-        webcamDevice = new WebcamDeviceFake(img);
+        webcamDevice = new WebcamDeviceFake(img, GET_IMAGE_DELAY_MILLIS);
         webcam = new WebcamFake(webcamDevice);
     }
 
     @Test
     void whenInstantiatingWithCustomName_thenNameIsSet() {
         String deviceName = "custom name";
-        webcamDevice = new WebcamDeviceFake(deviceName, img, 0);
+        webcamDevice = new WebcamDeviceFake(deviceName, img, 0L);
 
         assertThat(webcamDevice.getName()).isEqualTo(deviceName);
     }
@@ -69,20 +71,18 @@ class WebcamDeviceFakeTest {
 
     @Test
     void whenGettingImageWithNullImage_returnsNullAfterDelay() throws InterruptedException {
-        WebcamDeviceFake webcamDevice = new WebcamDeviceFake(null);
+        WebcamDeviceFake webcamDevice = new WebcamDeviceFake(null, GET_IMAGE_DELAY_MILLIS);
         webcam = new WebcamFake(webcamDevice);
 
         assertThat(webcam.getImage()).isNotEqualTo(img);
-        // TODO can this fixed sleep be replaced with a conditional wait?
-        Thread.sleep(10000);
+        Thread.sleep(GET_IMAGE_DELAY_MILLIS + 1);
         assertNull(webcam.getImage());
     }
 
     @Test
     void whenGettingImageWithValidImage_returnsFinalImageAfterDelay() throws InterruptedException {
         assertThat(webcam.getImage()).isNotEqualTo(img);
-        // TODO can this fixed sleep be replaced with a conditional wait?
-        Thread.sleep(10000);
+        Thread.sleep(GET_IMAGE_DELAY_MILLIS + 1);
         assertThat(webcam.getImage()).isEqualTo(img);
     }
 

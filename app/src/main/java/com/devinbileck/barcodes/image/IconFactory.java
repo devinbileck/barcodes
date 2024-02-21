@@ -4,9 +4,9 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
-import javafx.scene.image.Image;
+import javax.validation.constraints.NotNull;
 
-import lombok.NonNull;
+import javafx.scene.image.Image;
 
 public class IconFactory {
     private static final Map<ICON, Image> images = new EnumMap<>(ICON.class);
@@ -17,30 +17,31 @@ public class IconFactory {
         TRASH
     }
 
-    public static Image getImage(@NonNull final ICON icon) {
-        switch (icon) {
-            case APP -> images.putIfAbsent(
-                    icon,
-                    new Image(
-                            Objects.requireNonNull(
-                                    IconFactory.class
-                                            .getClassLoader()
-                                            .getResourceAsStream("icons/qrcode_scan.png"))));
-            case COPY -> images.putIfAbsent(
-                    icon,
-                    new Image(
-                            Objects.requireNonNull(
-                                    IconFactory.class
-                                            .getClassLoader()
-                                            .getResourceAsStream("icons/copy.png"))));
-            case TRASH -> images.putIfAbsent(
-                    icon,
-                    new Image(
-                            Objects.requireNonNull(
-                                    IconFactory.class
-                                            .getClassLoader()
-                                            .getResourceAsStream("icons/trash.png"))));
-        }
+    static {
+        images.put(
+                ICON.APP,
+                new Image(
+                        Objects.requireNonNull(
+                                IconFactory.class
+                                        .getClassLoader()
+                                        .getResourceAsStream("icons/qrcode_scan.png"))));
+        images.put(
+                ICON.COPY,
+                new Image(
+                        Objects.requireNonNull(
+                                IconFactory.class
+                                        .getClassLoader()
+                                        .getResourceAsStream("icons/copy.png"))));
+        images.put(
+                ICON.TRASH,
+                new Image(
+                        Objects.requireNonNull(
+                                IconFactory.class
+                                        .getClassLoader()
+                                        .getResourceAsStream("icons/trash.png"))));
+    }
+
+    public static Image getImage(@NotNull final ICON icon) {
         return images.get(icon);
     }
 }

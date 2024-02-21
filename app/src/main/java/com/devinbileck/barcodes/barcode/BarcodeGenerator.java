@@ -13,6 +13,7 @@ import com.google.zxing.common.BitMatrix;
 
 public class BarcodeGenerator {
     private BarcodeGenerator() {
+        // this class cannot be instantiated
     }
 
     public static BarcodeResult generateQRCodeImage(@NotNull final String barcodeText) throws WriterException {

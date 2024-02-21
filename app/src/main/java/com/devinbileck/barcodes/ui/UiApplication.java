@@ -15,6 +15,7 @@ public class UiApplication extends Application {
 
     @Override
     public void init() {
+        System.setProperty("org.springframework.boot.logging.LoggingSystem", "none");
         //noinspection ZeroLengthArrayAllocation
         this.context =
                 new SpringApplicationBuilder()

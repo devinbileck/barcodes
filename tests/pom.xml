@@ -16,8 +16,8 @@
 
     <properties>
         <!-- Testing -->
-        <testfx.version>4.0.16-alpha</testfx.version>
-        <openjfx-monocle.version>jdk-12.0.1+2</openjfx-monocle.version>
+        <testfx.version>4.0.18</testfx.version>
+        <openjfx-monocle.version>21.0.2</openjfx-monocle.version>
     </properties>
 
     <dependencies>
@@ -25,6 +25,7 @@
             <groupId>com.devinbileck.barcodes</groupId>
             <artifactId>app</artifactId>
             <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.devinbileck.barcodes</groupId>
@@ -73,10 +74,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
@@ -100,16 +97,8 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>run-integration-tests</id>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>

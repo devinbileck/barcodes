@@ -1,5 +1,6 @@
 package com.devinbileck.barcodes.test.statements;
 
+import static com.devinbileck.barcodes.test.utils.JavaFxThreadUtil.runInFxThread;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.image.BufferedImage;
@@ -9,14 +10,13 @@ import java.util.concurrent.TimeoutException;
 import javafx.concurrent.Worker;
 
 import com.devinbileck.barcodes.test.utils.JavaFxServiceUtil;
-import com.devinbileck.barcodes.test.utils.JavaFxThreadUtil;
 import com.devinbileck.barcodes.webcam.WebcamService;
 
 public class WhenTheWebcamService {
     private final WebcamService webcamService;
     private final JavaFxServiceUtil<BufferedImage> webcamServiceUtil;
 
-    public WhenTheWebcamService(WebcamService webcamService) {
+    public WhenTheWebcamService(final WebcamService webcamService) {
         this.webcamService = webcamService;
         this.webcamServiceUtil = new JavaFxServiceUtil<>(webcamService);
     }
@@ -29,7 +29,7 @@ public class WhenTheWebcamService {
 
     public WhenTheWebcamService isStopped()
             throws ExecutionException, InterruptedException, TimeoutException {
-        JavaFxThreadUtil.runInFxThread(webcamService::cancel);
+        runInFxThread(webcamService::cancel);
         return this;
     }
 

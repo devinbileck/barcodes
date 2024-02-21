@@ -3,13 +3,15 @@ package com.devinbileck.barcodes.webcam;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
+import javax.validation.constraints.NotNull;
+
 import com.github.sarxos.webcam.WebcamDevice;
 import com.github.sarxos.webcam.WebcamResolution;
 
 import com.devinbileck.barcodes.image.ImageUtil;
 
 public class WebcamDeviceFake implements WebcamDevice {
-    protected static final long GET_IMAGE_DELAY_MILLIS_DEFAULT = 5000L;
+    protected static final long DEFAULT_GET_IMAGE_DELAY_MILLIS = 100L;
     protected final String deviceName;
     protected final BufferedImage bufferedImage;
     protected final Dimension[] resolutions;
@@ -22,7 +24,7 @@ public class WebcamDeviceFake implements WebcamDevice {
      * Simulates a functioning {@link WebcamDevice}.
      *
      * <p>It will return the provided {@link BufferedImage} when calling {@link #getImage} after a
-     * delay has elapsed, by default {@value GET_IMAGE_DELAY_MILLIS_DEFAULT} milliseconds. If {@link
+     * delay has elapsed, by default {@value DEFAULT_GET_IMAGE_DELAY_MILLIS} milliseconds. If {@link
      * #getImage} is called before the delay has elapsed, it will return an image showing the number
      * of milliseconds until the delay will elapse.
      *
@@ -30,10 +32,30 @@ public class WebcamDeviceFake implements WebcamDevice {
      * the camera.
      *
      * @param bufferedImage The image to be returned when calling {@link #getImage} after the
-     *     default delay of {@value GET_IMAGE_DELAY_MILLIS_DEFAULT} milliseconds has elapsed.
+     *     default delay of {@value DEFAULT_GET_IMAGE_DELAY_MILLIS} milliseconds has elapsed.
      */
-    public WebcamDeviceFake(BufferedImage bufferedImage) {
-        this("FunctioningWebcamDeviceFake", bufferedImage, GET_IMAGE_DELAY_MILLIS_DEFAULT);
+    public WebcamDeviceFake(final BufferedImage bufferedImage) {
+        this(bufferedImage, DEFAULT_GET_IMAGE_DELAY_MILLIS);
+    }
+
+    /**
+     * Simulates a functioning {@link WebcamDevice}.
+     *
+     * <p>It will return the provided {@link BufferedImage} when calling {@link #getImage} after the
+     * specified getImageDelayMillis delay has elapsed. If {@link #getImage} is called before the
+     * delay has elapsed, it will return an image showing the number of milliseconds until the delay
+     * will elapse.
+     *
+     * <p>The purpose of having a delay is to simulate time taken for the user to show a barcode to
+     * the camera.
+     *
+     * @param bufferedImage The image to be returned when calling {@link #getImage} after the
+     *     provided getImageDelayMillis delay has elapsed.
+     * @param getImageDelayMillis The number of milliseconds before the image will be returned when
+     *     calling {@link #getImage}.
+     */
+    public WebcamDeviceFake(final BufferedImage bufferedImage, final long getImageDelayMillis) {
+        this("FunctioningWebcamDeviceFake", bufferedImage, getImageDelayMillis);
     }
 
     /**
@@ -54,7 +76,7 @@ public class WebcamDeviceFake implements WebcamDevice {
      *     calling {@link #getImage}.
      */
     public WebcamDeviceFake(
-            String deviceName, BufferedImage bufferedImage, long getImageDelayMillis) {
+            @NotNull final String deviceName, final BufferedImage bufferedImage, final long getImageDelayMillis) {
         this.deviceName = deviceName;
         this.bufferedImage = bufferedImage;
         this.getImageDelayMillis = getImageDelayMillis;
@@ -89,7 +111,7 @@ public class WebcamDeviceFake implements WebcamDevice {
     }
 
     @Override
-    public void setResolution(Dimension dimension) {
+    public void setResolution(final Dimension dimension) {
         resolution = dimension;
     }
 
@@ -104,7 +126,7 @@ public class WebcamDeviceFake implements WebcamDevice {
                             "%s",
                             getImageDelayMillis + getImageTimestamp - System.currentTimeMillis());
             return ImageUtil.generateTextImage(
-                    countDownText, (int) resolution.getWidth(), (int) resolution.getHeight());
+                    countDownText, 640, 480);
         }
 
         getImageTimestamp = 0;
