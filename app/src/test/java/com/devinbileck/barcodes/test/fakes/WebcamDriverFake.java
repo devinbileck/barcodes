@@ -1,10 +1,10 @@
 package com.devinbileck.barcodes.test.fakes;
 
-import com.github.sarxos.webcam.WebcamDevice;
-import com.github.sarxos.webcam.WebcamDriver;
-
 import java.util.Collections;
 import java.util.List;
+
+import com.github.sarxos.webcam.WebcamDevice;
+import com.github.sarxos.webcam.WebcamDriver;
 
 public class WebcamDriverFake implements WebcamDriver {
     @Override

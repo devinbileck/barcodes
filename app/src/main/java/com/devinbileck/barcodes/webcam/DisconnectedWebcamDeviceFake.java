@@ -1,8 +1,8 @@
 package com.devinbileck.barcodes.webcam;
 
-import com.github.sarxos.webcam.WebcamDevice;
-
 import javax.validation.constraints.NotNull;
+
+import com.github.sarxos.webcam.WebcamDevice;
 
 public class DisconnectedWebcamDeviceFake extends WebcamDeviceFake {
 

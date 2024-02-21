@@ -8,10 +8,11 @@ import java.util.Comparator;
 
 import javafx.concurrent.Task;
 
+import org.springframework.stereotype.Service;
+
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamException;
 import com.github.sarxos.webcam.WebcamResolution;
-import org.springframework.stereotype.Service;
 
 @Service
 public class WebcamService extends javafx.concurrent.Service<BufferedImage> {

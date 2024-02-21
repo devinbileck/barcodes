@@ -3,12 +3,12 @@ package com.devinbileck.barcodes.webcam;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
+import javax.validation.constraints.NotNull;
+
 import com.github.sarxos.webcam.WebcamDevice;
 import com.github.sarxos.webcam.WebcamResolution;
 
 import com.devinbileck.barcodes.image.ImageUtil;
-
-import javax.validation.constraints.NotNull;
 
 public class WebcamDeviceFake implements WebcamDevice {
     protected static final long DEFAULT_GET_IMAGE_DELAY_MILLIS = 100L;

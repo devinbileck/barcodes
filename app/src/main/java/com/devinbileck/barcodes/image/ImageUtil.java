@@ -1,12 +1,12 @@
 package com.devinbileck.barcodes.image;
 
-import org.apache.commons.text.WordUtils;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
+
+import org.apache.commons.text.WordUtils;
 
 public class ImageUtil {
     private ImageUtil() {

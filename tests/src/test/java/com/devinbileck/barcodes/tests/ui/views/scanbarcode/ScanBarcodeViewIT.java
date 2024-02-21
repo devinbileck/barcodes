@@ -1,5 +1,7 @@
 package com.devinbileck.barcodes.tests.ui.views.scanbarcode;
 
+import static com.devinbileck.barcodes.webcam.WebcamDiscoveryService.SIMULATED_WEBCAM_GET_IMAGE_DELAY_MILLIS;
+
 import java.util.concurrent.TimeoutException;
 
 import org.junit.jupiter.api.AfterEach;
@@ -11,8 +13,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import com.devinbileck.barcodes.components.views.main.MainView;
 import com.devinbileck.barcodes.components.views.scanbarcode.ScanBarcodeView;
 import com.devinbileck.barcodes.extensions.UiApplicationExtension;
-
-import static com.devinbileck.barcodes.webcam.WebcamDiscoveryService.SIMULATED_WEBCAM_GET_IMAGE_DELAY_MILLIS;
 
 @ExtendWith(UiApplicationExtension.class)
 class ScanBarcodeViewIT {
