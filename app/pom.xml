@@ -169,6 +169,7 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
+                        <!-- Exclude UI centric classes that are not necessary to automate. -->
                         <exclude>**/ui/views/**/*ViewController*.class</exclude>
                         <exclude>**/ui/PrimaryStageInitializer.class</exclude>
                         <exclude>**/ui/StageReadyEvent.class</exclude>
@@ -229,6 +230,36 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>headless</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <!-- Exclude classes that currently cannot run in a headless environment
+                                (i.e. GitHub CI workflow) due to encountering
+                                "UnsupportedOperationException: Unable to open DISPLAY".-->
+                                <exclude>**/barcodes/webcam/WebcamService*.class</exclude>
+                                <exclude>**/barcodes/ui/views/scanbarcode/ScanBarcodeViewModel.class</exclude>
+                                <!-- Exclude UI centric classes that are not necessary to automate. -->
+                                <exclude>**/ui/views/**/*ViewController*.class</exclude>
+                                <exclude>**/ui/PrimaryStageInitializer.class</exclude>
+                                <exclude>**/ui/StageReadyEvent.class</exclude>
+                                <exclude>**/ui/UiApplication.class</exclude>
+                                <exclude>**/MainApplication.class</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
         <profile>
             <id>mutation-tests</id>
             <activation>

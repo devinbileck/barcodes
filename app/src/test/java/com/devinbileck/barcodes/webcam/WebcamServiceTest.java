@@ -6,17 +6,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
-import com.devinbileck.barcodes.test.fakes.WebcamDriverFake;
 import javafx.application.Platform;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIf;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.github.sarxos.webcam.Webcam;
@@ -25,12 +25,15 @@ import com.github.sarxos.webcam.WebcamException;
 import com.github.sarxos.webcam.WebcamResolution;
 
 import com.devinbileck.barcodes.test.extensions.JavaFxToolkitExtension;
+import com.devinbileck.barcodes.test.fakes.WebcamDriverFake;
 import com.devinbileck.barcodes.test.statements.GivenAWebcamService;
 import com.devinbileck.barcodes.test.statements.ThenTheWebcamService;
 import com.devinbileck.barcodes.test.statements.WhenTheWebcamService;
 import com.devinbileck.barcodes.test.utils.JavaFxServiceUtil;
 
 @ExtendWith(JavaFxToolkitExtension.class)
+@DisabledIf(value = "java.awt.GraphicsEnvironment#isHeadless",
+        disabledReason = "Headless environment is unable to open DISPLAY while running in Fx thread")
 class WebcamServiceTest {
     private final BufferedImage bufferedImage = new BufferedImage(640, 480, TYPE_INT_RGB);
     private final WebcamService webcamService = new WebcamService();
